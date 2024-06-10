@@ -1,0 +1,88 @@
+<div class="main_container">
+  <form class="form_container" [formGroup]="form">
+    <h1 class="main_title">
+      Калькулятор термопар <br /><span>ThermoType</span>
+    </h1>
+
+    <mat-form-field>
+      <mat-label>Выбор расчета:</mat-label>
+      <mat-select formControlName="calc_type" name="calculate">
+        @for (calculate of calculate; track calculate) {
+        <mat-option [value]="calculate.value">{{
+          calculate.viewValue
+        }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Тип термопары:</mat-label>
+      <mat-select formControlName="thermo_type" name="thermocouple">
+        @for (thermocouple of thermocouple; track thermocouple) {
+        <mat-option [value]="thermocouple.value">{{
+          thermocouple.viewValue
+        }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form_container_input">
+      <mat-label>Диапазон температуры:</mat-label>
+      <input disabled [value]="temperatureRange" matInput />
+    </mat-form-field>
+    <mat-form-field class="form_container_input">
+      <mat-label>Диапазон напряжения:</mat-label>
+      <input disabled [value]="voltageRange" matInput />
+    </mat-form-field>
+    <mat-form-field class="form_container_input">
+      <mat-label>Температура холодного спая:</mat-label>
+      <input
+        matInput
+        formControlName="tempamb"
+        type="number"
+        class="example-right-align"
+        placeholder="0"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select formControlName="scale_type" name="typeTemperature">
+        @for (typeTemperature of typesTemperature; track typeTemperature) {
+        <mat-option [value]="typeTemperature.value">{{
+          typeTemperature.viewValue
+        }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form_container_input">
+      <mat-label>Напряжение (мВ):</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="mv_read"
+        class="example-right-align result-field"
+        placeholder="0"
+      />
+    </mat-form-field>
+    <mat-form-field class="form_container_input">
+      <mat-label>Температура {{ selectedTemperatureViewValue }}:</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="temp_in"
+        class="example-right-align result-field"
+        placeholder="0"
+      />
+    </mat-form-field>
+    <div class="form_calculate-button-container">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid"
+        (click)="thermCalc()"
+        class="form_calculate-button"
+      >
+        Рассчитать
+      </button>
+    </div>
+  </form>
+</div>
